@@ -57,6 +57,7 @@ HANGMANPICS = ['''
 print("Let's play Hangman")
 print(HANGMANPICS[0])
 lives = 6
+index_hangman = 0
 #Generate random word from list
 word_list = ["elephant","apple","mango","cocacola","fanta","notebook"]
 random_word = word_list[random.randint(0,len(word_list)-1)]
@@ -80,9 +81,13 @@ while bool_val:
     for letter in random_word:
         if letter == guess:
             count = count + 1
-    print(count)
 
+    #substitutue value in "_"
     index = 0
+    # keep count of "_"
+    blank_count = 0
+
+    #right answer
     if count >= 1:
         
         for replace_letter in random_word:
@@ -91,10 +96,13 @@ while bool_val:
             index = index + 1
         print(blank_space)
         for check in blank_space:
-            if check != "_":
-                bool_val = False
+            if check == "_":
+                blank_count += 1
+        
+        if blank_count == 0:
+            bool_val = False
 
-    print(blank_space)
+
 
 
         
@@ -103,7 +111,18 @@ while bool_val:
     new_word = ""
     for letters in blank_space:
         new_word += letters
-    print(new_word)
 
     if new_word == random_word:
         print("Player has won")
+
+    
+    # wrong answer
+    
+    if count == 0:
+        print(HANGMANPICS[index_hangman + 1])
+        lives -= 1
+        index_hangman += 1
+
+    if lives <= 0:
+        print("Game Over")
+        bool_val = False
