@@ -6,6 +6,8 @@ shift = int(input("Type the shift number:\n"))
 
 #TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
 
+
+
 def encrypt(text,shift):
   text_list = list()
   for i in text:
@@ -26,6 +28,33 @@ def encrypt(text,shift):
         encode_list.append(alphabet[new_index])
       index += 1
   print(encode_list)
+  
+     
 
-encrypt(text,shift)       
+
+def decrypt(text,shift):
+  text_list = list()
+  for i in text:
+    text_list.append(i)
+  print(text_list)
+  
+  
+  decode_list = list()
+  for i in text_list:
+    index = 0
+    new_index = 0
+    for j in alphabet:
+      if i == j:
+        new_index = index - shift
+        if new_index <= 0:
+          remain_index = new_index - 25
+        decode_list.append(alphabet[new_index])
+      index += 1
+  print(decode_list)
+
+     
         
+if direction == "encode":
+    encrypt(text,shift)
+elif direction == "decode":
+    decrypt(text,shift)
